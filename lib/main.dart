@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shop_me/providers/products_provider.dart';
+import 'package:shop_me/screens/product_detail_screen.dart';
 import 'package:shop_me/screens/product_overview_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Lato',
         ),
         home: ProductOverviwScreen(),
+        routes: {
+          ProductDetailScreen.id: (context) => ProductDetailScreen(),
+        },
       ),
     );
   }
