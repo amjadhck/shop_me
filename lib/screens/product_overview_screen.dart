@@ -2,18 +2,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_me/providers/cart.dart';
 import 'package:shop_me/screens/cart_screen.dart';
+import 'package:shop_me/screens/login_screen.dart';
 import 'package:shop_me/widgets/badge.dart';
 
 import 'package:shop_me/widgets/product_grid.dart';
 
-enum FilterOption {
-  Favorite,
-  All,
-}
+enum FilterOption { Favorite, All, Logout }
 
 class ProductOverviwScreen extends StatefulWidget {
+  static const id = '/overview-screen';
   @override
   State<ProductOverviwScreen> createState() => _ProductOverviwScreenState();
 }
@@ -63,6 +63,13 @@ class _ProductOverviwScreenState extends State<ProductOverviwScreen> {
                 child: Text("Show All"),
                 value: FilterOption.All,
               ),
+              PopupMenuItem(
+                child: Text("Logout"),
+                value: FilterOption.Logout,
+                onTap: () {
+                  logout(context);
+                },
+              ),
             ],
           ),
         ],
@@ -73,4 +80,14 @@ class _ProductOverviwScreenState extends State<ProductOverviwScreen> {
       body: ProductGrid(_showOnlyFav),
     );
   }
+}
+
+void logout(BuildContext context) async {
+  final _sharedPrefs = await SharedPreferences.getInstance();
+  await _sharedPrefs.clear();
+
+  WidgetsBinding.instance!.addPostFrameCallback((_) {
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(LoginScreen.id, (route) => false);
+  });
 }
