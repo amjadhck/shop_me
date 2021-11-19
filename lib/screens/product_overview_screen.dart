@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_me/providers/cart.dart';
 import 'package:shop_me/screens/cart_screen.dart';
+import 'package:shop_me/screens/drawer_screen.dart';
 import 'package:shop_me/screens/login_screen.dart';
 import 'package:shop_me/widgets/badge.dart';
 
@@ -76,7 +77,7 @@ class _ProductOverviwScreenState extends State<ProductOverviwScreen> {
         title: const Text('shopMe'),
         centerTitle: true,
       ),
-      //drawer: Drawer(),
+      drawer: DrawerScreen(),
       body: ProductGrid(_showOnlyFav),
     );
   }

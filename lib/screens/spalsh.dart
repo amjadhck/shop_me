@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_me/main.dart';
@@ -49,8 +47,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> checkLoggedIn() async {
     final _sharedPrefs = await SharedPreferences.getInstance();
-    final _userLoggedIn = _sharedPrefs.getBool(saveKeyName);
-    if (_userLoggedIn == null || _userLoggedIn == false) {
+    final _userName = _sharedPrefs.getBool(saveUserName);
+    final _password = _sharedPrefs.getBool(savePassword);
+    if (_userName == null ||
+        _userName == false && _password == null ||
+        _password == false) {
       gotoLogin();
     } else {
       Navigator.of(context).pushReplacementNamed(ProductOverviwScreen.id);

@@ -142,15 +142,16 @@ class _LoginScreenState extends State<LoginScreen> {
   void checkLogin(BuildContext context) async {
     final _username = usernameController.text;
     final _password = passwordController.text;
-    if (_username == _password) {
+    if (_username != null && _password != null) {
       //go to home
       final _sharedPrefs = await SharedPreferences.getInstance();
-      await _sharedPrefs.setBool(saveKeyName, true);
+      await _sharedPrefs.setBool(saveUserName, true);
+      await _sharedPrefs.setBool(savePassword, true);
       Navigator.of(context)
           .pushNamedAndRemoveUntil(ProductOverviwScreen.id, (route) => false);
     } else {
       //snackbar
-      final _errorMesage = "Username and Password does not match";
+      final _errorMesage = "Username or Password does not match";
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(_errorMesage),

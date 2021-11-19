@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_me/providers/cart.dart';
+import 'package:shop_me/providers/orders.dart';
+import 'package:shop_me/screens/order_screen.dart';
 import 'package:shop_me/widgets/badge.dart';
 import 'package:shop_me/widgets/cart_items.dart';
 
@@ -16,20 +18,39 @@ class CartScreen extends StatelessWidget {
         title: const Text("Your Cart"),
         actions: [
           Consumer<Cart>(
-            builder: (_, cart, child) => Badge(
-              child: child!,
-              value: cart.quantityCount.toString(),
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            child: IconButton(
-              onPressed: () {
-                //Navigator.of(context).pushNamed(CartScreen.id);
-              },
-              icon: const Icon(
-                Icons.shopping_cart,
-              ),
-            ),
-          )
+              builder: (_, cart, child) => Badge(
+                    child: child!,
+                    value: cart.quantityCount.toString(),
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.shopping_cart),
+              )),
+          const SizedBox(
+            width: 10,
+          ),
+          Consumer<Orders>(
+              builder: (_, order, child) => Badge(
+                    child: child!,
+                    value: order.itemCount.toString(),
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+              child: IconButton(
+                icon: const Icon(Icons.payment),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(OrderScreen.id);
+                },
+              )),
+          const SizedBox(
+            width: 10,
+          ),
+
+          // IconButton(
+          //     onPressed: () {
+          //       Navigator.of(context).pushNamed(OrderScreen.id);
+          //     },
+          //     icon: const Icon(Icons.payment))
         ],
       ),
       body: Column(
@@ -57,7 +78,15 @@ class CartScreen extends StatelessWidget {
                     ),
                     backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
-                  TextButton(onPressed: () {}, child: const Text("ORDER NOW"))
+                  TextButton(
+                      onPressed: () {
+                        Provider.of<Orders>(context, listen: false).addOrder(
+                          cart.items.values.toList(),
+                          cart.totalAmount,
+                        );
+                        cart.clear();
+                      },
+                      child: const Text("Add to Orders"))
                 ],
               ),
             ),
