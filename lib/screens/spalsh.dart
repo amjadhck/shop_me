@@ -47,8 +47,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> checkLoggedIn() async {
     final _sharedPrefs = await SharedPreferences.getInstance();
-    final _userName = _sharedPrefs.getBool(saveUserName);
-    final _password = _sharedPrefs.getBool(savePassword);
+    final _userName = _sharedPrefs.getString('username');
+    final _password = _sharedPrefs.getString('password');
     if (_userName == null ||
         _userName == false && _password == null ||
         _password == false) {

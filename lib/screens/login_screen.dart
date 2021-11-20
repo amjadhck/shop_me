@@ -145,8 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_username != null && _password != null) {
       //go to home
       final _sharedPrefs = await SharedPreferences.getInstance();
-      await _sharedPrefs.setBool(saveUserName, true);
-      await _sharedPrefs.setBool(savePassword, true);
+      await _sharedPrefs.setString('username', _username);
+      await _sharedPrefs.setString('password', _password);
       Navigator.of(context)
           .pushNamedAndRemoveUntil(ProductOverviwScreen.id, (route) => false);
     } else {

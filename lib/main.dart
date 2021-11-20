@@ -11,9 +11,7 @@ import 'package:shop_me/screens/product_detail_screen.dart';
 import 'package:shop_me/screens/product_overview_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_me/screens/spalsh.dart';
-
-const saveUserName = 'UserName';
-const savePassword = 'Password';
+import 'package:shop_me/screens/user_product_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -64,6 +62,7 @@ class MyApp extends StatelessWidget {
           LoginScreen.id: (context) => LoginScreen(),
           ProductOverviwScreen.id: (context) => ProductOverviwScreen(),
           OrderScreen.id: (context) => OrderScreen(),
+          UserProductScreen.id: (context) => UserProductScreen(),
         },
       ),
     );

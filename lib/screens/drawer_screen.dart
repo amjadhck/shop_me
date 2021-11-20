@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shop_me/screens/product_overview_screen.dart';
+import 'package:shop_me/screens/user_product_screen.dart';
 
 import 'order_screen.dart';
 
@@ -31,6 +32,13 @@ class DrawerScreen extends StatelessWidget {
             title: Text("Orders"),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(OrderScreen.id);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.shopping_bag),
+            title: Text("Manage Products"),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(UserProductScreen.id);
             },
           ),
         ],
