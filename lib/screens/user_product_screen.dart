@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_me/providers/product.dart';
 import 'package:shop_me/providers/products_provider.dart';
 import 'package:shop_me/screens/drawer_screen.dart';
+import 'package:shop_me/screens/edit_product_screen.dart';
 import 'package:shop_me/widgets/user_product_item.dart';
 
 class UserProductScreen extends StatelessWidget {
@@ -16,7 +17,9 @@ class UserProductScreen extends StatelessWidget {
         title: const Text("Your Products"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(EditProductScreen.id);
+            },
             icon: const Icon(Icons.add),
           ),
         ],
