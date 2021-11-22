@@ -58,8 +58,17 @@ class ProductProvider with ChangeNotifier {
       description: product.description,
       price: product.price,
       imageUrl: product.imageUrl,
+      isFavorite: product.isFavorite,
     );
-    _items.insert(0, newProduct);
+    _items.add(newProduct);
     notifyListeners();
+  }
+
+  void updateProduct(String id, Product newProduct) {
+    final prodIndex = _items.indexWhere((element) => element.id == id);
+    if (prodIndex >= 0) {
+      _items[prodIndex] = newProduct;
+      notifyListeners();
+    } else {}
   }
 }
