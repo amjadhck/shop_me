@@ -15,7 +15,7 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context, listen: false);
-    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final productId = ModalRoute.of(context)!.settings.arguments.toString();
 
     final loadedProduct = Provider.of<ProductProvider>(context, listen: false)
         .findById(productId);
@@ -92,7 +92,7 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    cart.addItem(loadedProduct.id, loadedProduct.price,
+                    cart.addItem(loadedProduct.id!, loadedProduct.price,
                         loadedProduct.title);
                   },
                   child: Row(

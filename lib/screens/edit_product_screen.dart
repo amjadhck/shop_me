@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_me/providers/product.dart';
@@ -19,10 +17,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _descriptionFocusNode = FocusNode();
   final _imageUrlController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  var newId = null;
   var _isInit = true;
   var _editedProduct = Product(
-    id: '',
+    id: null,
     title: '',
     description: '',
     price: 0,
@@ -44,7 +41,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      final productId = ModalRoute.of(context)!.settings.arguments as String;
+      final productId = ModalRoute.of(context)!.settings.arguments.toString();
       if (productId != null) {
         _editedProduct =
             Provider.of<ProductProvider>(context).findById(productId);
@@ -91,9 +88,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
       return;
     }
     _formKey.currentState!.save();
-    if (_editedProduct.id.isNotEmpty) {
+    if (_editedProduct.id!.isNotEmpty) {
       Provider.of<ProductProvider>(context, listen: false)
-          .updateProduct(_editedProduct.id, _editedProduct);
+          .updateProduct(_editedProduct.id!, _editedProduct);
     } else {
       Provider.of<ProductProvider>(context, listen: false)
           .addProduct(_editedProduct);
